@@ -1,11 +1,11 @@
 const express = require('express');
-
+const db = require('../db');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
 
     try {
-        const data = db.query('SELECT * FROM todo;');
+        const data = await db.query('SELECT ID * FROM todo;');
         res.status(200).json({todo: data.rows});
     }
     catch(error) {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log(req.body);
     const { task } = req.body;
 
@@ -47,4 +47,4 @@ router.delete('/', async (req, res) => {
 });
 
 
-module.exports = ; 
+module.exports = router; 
